@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Casa dei Fiori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+		/* Background Styles */
+		body {
+			background-color: #FCE4EC;
+			background-image: url('https://i.imgur.com/NyS8vZU.jpeg');
+			background-position: center center;
+			background-size: cover;
+			background-attachment: fixed; /* Ensure background stays in place when scrolling */
+			font-family: 'Poppins', sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #880E4F;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 3.7rem;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: max-height 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar button {
+            background-color: #C2185B;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+
+        .navbar button:hover {
+            background-color: #AD1457;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Button */
+		.menu-toggle {
+			display: none;
+			font-size: 2rem;
+			color: white;
+			cursor: pointer;
+		}
+
+		@media (max-width: 768px) {
+			.navbar {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.navbar ul {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 12px;
+				justify-content: space-between;
+				width: 100%;
+				max-height: 0;
+				transition: max-height 0.5s ease-in-out;
+			}
+
+			.navbar ul.active {
+				max-height: 600px;
+			}
+
+			.navbar ul li {
+				width: calc(33.33% - 12px);
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.navbar button, .add-to-cart, .product-button, .cart-button {
+				padding: 12px 16px; /* Reduced padding for a more compact look */
+				width: 100%; /* Ensures all buttons are of equal size */
+				box-sizing: border-box;
+				text-align: center; /* Ensures text is centered */
+				white-space: nowrap; /* Prevents wrapping of text */
+				font-size: 1rem; /* Adjust font size for smaller buttons */
+				overflow: hidden; /* Hides text that overflows */
+				text-overflow: ellipsis; /* Optional: Adds ellipsis for overflow text */
+			}
+
+			.menu-toggle {
+				display: block;
+			}
+		}
+
+      /* Product Checkout Section */
+			.checkout-container {
+				width: 60%;
+				margin: 40px auto;
+				background-color: white;
+				border-radius: 10px;
+				padding: 30px;
+				box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+			}
+
+			.product-details {
+				display: flex;
+				gap: 30px;
+				margin-bottom: 20px;
+				flex-wrap: wrap; /* Allow elements to wrap on smaller screens */
+				justify-content: space-between;
+			}
+
+			.product-image img {
+				width: 250px;
+				border-radius: 10px;
+				max-width: 100%;
+			}
+
+			.product-info {
+				flex-grow: 1;
+			}
+
+			.product-info h3 {
+				font-size: 2rem;
+				color: #D81B60;
+			}
+
+			.product-info p {
+				font-size: 1.2rem;
+				color: #444;
+			}
+
+			.product-info .price {
+				font-size: 1.5rem;
+				color: #880E4F;
+				margin: 20px 0;
+			}
+
+			.product-info .quantity input {
+				width: 70px;
+				padding: 10px;
+				font-size: 1.2rem;
+				border-radius: 5px;
+				border: 1px solid #ddd;
+			}
+
+			.product-info button {
+				background-color: #D81B60;
+				color: white;
+				padding: 12px 25px;
+				font-size: 1.2rem;
+				border: none;
+				border-radius: 8px;
+				cursor: pointer;
+				transition: background 0.3s;
+				width: 100%;
+			}
+
+			.product-info button:hover {
+				background-color: #AD1457;
+			}
+
+			/* Options Section */
+			.options-section {
+				margin-top: 20px;
+			}
+
+			.options-section h4, .address-section h4 {
+				font-size: 1.5rem;
+				color: #D81B60;
+				margin-bottom: 10px;
+			}
+
+			.options-section .option {
+				margin-bottom: 15px;
+			}
+
+			.options-section select, .options-section input[type="text"], .options-section input[type="number"] {
+				width: 100%;
+				padding: 8px;
+				margin-top: 5px;
+				border-radius: 5px;
+				border: 1px solid #ddd;
+			}
+
+			.options-section input[type="radio"] {
+				margin-right: 10px;
+			}
+
+			/* Buyer Address Section */
+			.address-section input {
+				width: 100%;
+				padding: 8px;
+				margin-top: 5px;
+				border-radius: 5px;
+				border: 1px solid #ddd;
+			}
+
+			.address-section label {
+				display: block;
+				margin-top: 15px;
+				font-size: 1rem;
+				color: #D81B60;
+			}
+
+			.checkout-button button {
+				background-color: #C2185B;
+				color: white;
+				border: none;
+				font-size: 1rem;
+				font-weight: 500;
+				padding: 12px 24px;
+				border-radius: 8px;
+				cursor: pointer;
+				transition: background 0.3s;
+				width: 100%;
+			}
+
+			.checkout-button button:hover {
+				background-color: #AD1457;
+			}
+
+			/* Footer Section */
+			.footer {
+				background-color: #880E4F;
+				color: white;
+				text-align: center;
+				padding: 20px 0;
+				margin-top: 50px;
+			}
+
+			.footer a {
+				color: white;
+				text-decoration: none;
+				margin: 0 10px;
+			}
+
+			.footer a:hover {
+				text-decoration: underline;
+			}
+
+			/* Responsive Styling for Mobile View */
+			@media (max-width: 768px) {
+				.checkout-container {
+					width: 90%;
+					padding: 15px;
+				}
+
+				.product-details {
+					flex-direction: column;
+					align-items: center; /* Center the content */
+					gap: 20px;
+				}
+
+				.product-image img {
+					width: 200px;
+				}
+
+				.product-info {
+					text-align: center; /* Center text content */
+				}
+
+				.product-info h3 {
+					font-size: 1.5rem;
+				}
+
+				.product-info p {
+					font-size: 1rem;
+				}
+
+				.product-info .price {
+					font-size: 1.2rem;
+				}
+
+				.product-info .quantity input {
+					width: 50px;
+					font-size: 1rem;
+				}
+
+				.product-info button {
+					font-size: 1rem;
+					padding: 10px 20px;
+				}
+
+				.options-section h4, .address-section h4 {
+					font-size: 1.2rem;
+				}
+
+				.checkout-button button {
+					font-size: 1rem;
+					padding: 10px 20px;
+				}
+			}
+
+			/* Additional adjustments for very small screens */
+			@media (max-width: 480px) {
+				.checkout-container {
+					padding: 10px;
+				}
+
+				.product-details {
+					gap: 20px;
+				}
+
+				.product-info h3 {
+					font-size: 1.3rem;
+				}
+
+				.product-info .price {
+					font-size: 1.1rem;
+				}
+
+				.product-info button {
+					font-size: 1rem;
+					padding: 8px 15px;
+				}
+
+				.footer {
+					padding: 15px 0;
+				}
+			}
+
+
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar">
+    <h1>Casa dei Fiori</h1>
+    <!-- Mobile menu toggle button -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navbar-menu">
+        <li><a href="home1.html"><button><i class="fa-solid fa-house"></i> Home</button></a></li>
+        <li><a href="about1.html"><button><i class="fa-solid fa-person"></i> About Us</button></a></li>
+        <li><a href="products1.html"><button><i class="fa-solid fa-box-open"></i> Products</button></a></li>
+        <li><a href="contact1.html"><button><i class="fa-solid fa-phone"></i> Contact</button></a></li>
+        <li><a href="account1.html"><button><i class="fa-solid fa-user"></i> Account</button></a></li>
+        <li><a href="cart1.html"><button><i class="fa-solid fa-cart-shopping"></i> Your Cart</button></a></li>
+    </ul>
+</nav>
+
+<!-- Product Checkout Section -->
+<div class="checkout-container">
+    <!-- Product Details -->
+    <div class="product-details">
+        <div class="product-image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxi7Lvyu-F6j1BdhmQWB8plb6hF6weRpru7g&s" alt="Product">
+        </div>
+        <div class="product-info">
+            <h3>Product Name</h3>
+            <p>Product Description</p>
+            <p class="price">₱  .00</p>
+
+            <!-- Quantity Section -->
+            <div class="quantity">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" value="1" min="1" max="15">
+            </div>
+        </div>
+    </div>
+
+    <!-- Buyer Address Section -->
+    <div class="address-section">
+        <h4>Address</h4>
+        <input type="text" id="address" placeholder="Enter your address" required>
+    </div>
+
+    <!-- Options Section -->
+    <div class="options-section">
+        <h4>Payment Options</h4>
+        <div class="option">
+            <label for="payment-method">Choose a payment method:</label>
+			<select id="payment-method" onchange="showPaymentInput()">
+				<option value="cash">Cash</option>
+				<option value="Gcash">Gcash</option>
+				<option value="credit-card">Credit Card</option>
+				<option value="paypal">PayPal</option>
+				<option value="bank-transfer">Bank Transfer</option>
+			</select>
+		</div>
+		
+			<div id="payment-input-container" style="display: none;">
+			<label for="payment-info">Enter your phone/account number:</label>
+			<input type="text" id="payment-info" placeholder="Phone number or Account number">
+		</div>
+
+        <h4>Would you like a bouquet or a single piece?</h4>
+        <div class="option">
+            <input type="radio" id="bouquet" name="item-type" value="bouquet">
+            <label for="bouquet">Bouquet</label><br>
+            <input type="radio" id="single-piece" name="item-type" value="single-piece">
+            <label for="single-piece">Single Piece</label>
+        </div>
+
+        <h4>Gift Wrapping and Message Card</h4>
+        <div class="option">
+            <input type="checkbox" id="gift-wrap" checked>
+            <label for="gift-wrap">Include free gift wrapping</label><br>
+            <input type="checkbox" id="message-card" checked onchange="fillMessage()">
+            <label for="message-card">Include a free message card</label>
+        </div>
+
+        <h4>Additional Comments</h4>
+        <div class="option">
+            <label for="comments">Add a comment:</label>
+            <input type="text" id="comments" placeholder="Any special instructions?">
+        </div>
+
+        <!-- Checkout Button -->
+		<div class="checkout-button" style="text-align: center; margin-top: 20px;">
+			<button onclick="window.location.href='order_received.html'">Checkout</button>
+		</div>
+
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class="footer">
+    <p>&copy; 2025 Casa Dei Fiori. All rights reserved.</p>
+    <p>Contact us: contact@casadeifiori.com</p>
+    <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </p>
+</div>
+
+<script>
+    function addToCart() {
+        let quantity = document.getElementById("quantity").value;
+        let paymentMethod = document.getElementById("payment-method").value;
+        let comments = document.getElementById("comments").value;
+        let bouquet = document.getElementById("bouquet").checked;
+        let singlePiece = document.getElementById("single-piece").checked;
+        let giftWrap = document.getElementById("gift-wrap").checked;
+        let messageCard = document.getElementById("message-card").checked;
+
+        console.log("Added to Cart:");
+        console.log("Quantity: " + quantity);
+        console.log("Payment Method: " + paymentMethod);
+        console.log("Comments: " + comments);
+        console.log("Bouquet: " + bouquet);
+        console.log("Single Piece: " + singlePiece);
+        console.log("Gift Wrap: " + giftWrap);
+        console.log("Message Card: " + messageCard);
+    }
+
+    function fillMessage() {
+        if (document.getElementById("message-card").checked) {
+            document.getElementById("comments").value = "Happy Birthday! Enjoy your day!";
+        }
+    }
+	
+	function showPaymentInput() {
+        const paymentMethod = document.getElementById("payment-method").value;
+        const paymentInputContainer = document.getElementById("payment-input-container");
+        
+        // Show input field if payment method requires phone/account info
+        if (paymentMethod === "Gcash" || paymentMethod === "credit-card" || paymentMethod === "paypal" || paymentMethod === "bank-transfer") {
+            paymentInputContainer.style.display = "block";
+        } else {
+            paymentInputContainer.style.display = "none";
+        }
+    }
+
+    function checkout() {
+        alert("Proceeding to checkout.");
+    }
+    
+    function toggleMenu() {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

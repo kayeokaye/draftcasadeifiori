@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa dei Fiori - Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #FCE4EC;
+            background-image: url('https://i.imgur.com/NyS8vZU.jpeg');
+            background-position: center center;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #880E4F;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 3.7rem;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: max-height 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar button {
+            background-color: #C2185B;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+
+        .navbar button:hover {
+            background-color: #AD1457;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Button */
+		.menu-toggle {
+			display: none;
+			font-size: 2rem;
+			color: white;
+			cursor: pointer;
+		}
+
+		@media (max-width: 768px) {
+			.navbar {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.navbar ul {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 12px;
+				justify-content: space-between;
+				width: 100%;
+				max-height: 0;
+				transition: max-height 0.5s ease-in-out;
+			}
+
+			.navbar ul.active {
+				max-height: 600px;
+			}
+
+			.navbar ul li {
+				width: calc(33.33% - 12px);
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.navbar button, .add-to-cart, .product-button, .cart-button {
+				padding: 12px 16px; /* Reduced padding for a more compact look */
+				width: 100%; /* Ensures all buttons are of equal size */
+				box-sizing: border-box;
+				text-align: center; /* Ensures text is centered */
+				white-space: nowrap; /* Prevents wrapping of text */
+				font-size: 1rem; /* Adjust font size for smaller buttons */
+				overflow: hidden; /* Hides text that overflows */
+				text-overflow: ellipsis; /* Optional: Adds ellipsis for overflow text */
+			}
+
+			.menu-toggle {
+				display: block;
+			}
+		}
+
+        /* Sign Up Form Section */
+		.signup-container {
+			background-color: #FFF0F3;
+			padding: 35px;
+			margin: 50px auto;
+			width: 50%;
+			border-radius: 10px;
+			box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+			box-sizing: border-box;
+		}
+
+		/* Header */
+		.signup-container h2 {
+			font-size: 2.5rem;
+			color: #D81B60;
+			font-family: 'Dancing Script', cursive;
+			margin-bottom: 30px;
+			text-align: center;
+		}
+
+		/* Form Layout */
+		.form-row {
+			display: flex;
+			justify-content: space-between;
+			gap: 15px;
+			margin-bottom: 20px;
+		}
+
+		.form-row input, .form-row select {
+			width: 100%;
+			padding: 12px;
+			font-size: 1.1rem;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			box-sizing: border-box;
+		}
+
+		/* Age/Gender Row */
+		.age-gender-row {
+			display: flex;
+			justify-content: space-between;
+			gap: 15px;
+		}
+
+		.age-gender-row input,
+		.age-gender-row select {
+			width: 48%;
+			padding: 12px;
+			font-size: 1.1rem;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			box-sizing: border-box;
+		}
+
+		/* Phone Number Row */
+		.phone-row {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+
+		.phone-row input {
+			width: 100%;
+			max-width: 100%;
+			padding: 12px;
+			font-size: 1.1rem;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			box-sizing: border-box;
+		}
+
+		.phone-row {
+			margin-top: 22px;
+		}
+
+		/* OR Line */
+		.or-line {
+			position: relative;
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		.or-line::before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			border-top: 1px solid #ccc;
+			transform: translateY(-50%);
+		}
+
+		.or-line span {
+			background-color: #FFF0F3;
+			padding: 0 10px;
+			font-size: 1rem;
+			color: #D81B60;
+			font-weight: bold;
+			z-index: 1;
+			position: relative;
+		}
+
+		/* Form Control Focus */
+		.form-control:focus {
+			border-color: #D81B60;
+		}
+
+		/* Sign Up Button */
+		.btn-signup {
+			background-color: #C2185B;
+			color: white;
+			padding: 12px 25px;
+			border-radius: 8px;
+			border: none;
+			font-size: 1.2rem;
+			width: 100%;
+			cursor: pointer;
+			transition: background 0.3s;
+		}
+
+		.btn-signup:hover {
+			background-color: #AD1457;
+		}
+
+		/* Footer */
+		.signup-footer {
+			text-align: center;
+			margin-top: 20px;
+			font-size: 1rem;
+		}
+
+		.signup-footer a {
+			color: #D81B60;
+			text-decoration: none;
+		}
+
+		.signup-footer a:hover {
+			text-decoration: underline;
+		}
+
+		/* Footer Section */
+		.footer {
+			background-color: #880E4F;
+			color: white;
+			text-align: center;
+			padding: 20px 0;
+		}
+
+		.footer a {
+			color: white;
+			text-decoration: none;
+			margin: 0 10px;
+		}
+
+		.footer a:hover {
+			text-decoration: underline;
+		}
+
+		/* Responsive Adjustments */
+		@media (max-width: 768px) {
+			.signup-container {
+				width: 80%; /* Increase width for smaller screens */
+				padding: 25px; /* Reduce padding for small screens */
+			}
+
+			.signup-container h2 {
+				font-size: 2rem; /* Smaller font size for headings */
+			}
+
+			.form-row {
+				flex-direction: column; /* Stack inputs vertically */
+			}
+
+			.form-row input,
+			.form-row select {
+				width: 100%;
+				margin-bottom: 10px; /* Add space between inputs */
+			}
+
+			.age-gender-row {
+				flex-direction: column; /* Stack age and gender inputs vertically */
+			}
+
+			.age-gender-row input,
+			.age-gender-row select {
+				width: 100%; /* Make age and gender inputs full width */
+			}
+
+			.phone-row input {
+				width: 100%;
+			}
+
+			.btn-signup {
+				padding: 12px 20px; /* Adjust button padding */
+				font-size: 1.1rem; /* Reduce font size */
+			}
+		}
+
+		@media (max-width: 480px) {
+			.signup-container {
+				width: 90%; /* Further increase width for very small screens */
+				padding: 20px; /* Reduce padding further */
+			}
+
+			.signup-container h2 {
+				font-size: 1.5rem; /* Further reduce heading size */
+			}
+
+			.form-row {
+				flex-direction: column;
+			}
+
+			.form-row input,
+			.form-row select {
+				margin-bottom: 10px;
+			}
+
+			.age-gender-row {
+				flex-direction: column;
+			}
+
+			.age-gender-row input,
+			.age-gender-row select {
+				width: 100%;
+			}
+
+			.btn-signup {
+				padding: 12px 18px;
+				font-size: 1rem; /* Adjust font size for small screens */
+			}
+		}
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar">
+    <h1>Casa dei fiori</h1>
+</nav>
+
+<!-- Sign Up Form Section -->
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <form id="signup-form">
+        <!-- First Row: Last Name, Middle Name, First Name -->
+        <div class="form-row">
+            <input type="text" id="last-name" class="form-control" placeholder="Last Name" required>
+            <input type="text" id="middle-name" class="form-control" placeholder="Middle Name" required>
+            <input type="text" id="first-name" class="form-control" placeholder="First Name" required>
+        </div>
+
+        <!-- Second Row: Age, Gender -->
+        <div class="age-gender-row">
+            <input type="number" id="age" class="form-control" placeholder="Age" required>
+            <select id="gender" class="form-control" required>
+                <option value="">Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <!-- Phone Number Row -->
+        <div class="phone-row">
+            <input type="tel" id="phone" class="form-control" placeholder="Phone Number" required>
+        </div>
+
+        <!-- OR Line -->
+        <div class="or-line">
+            <span>OR</span>
+        </div>
+
+        <!-- Email Address Row -->
+        <div class="form-row">
+            <input type="email" id="email" class="form-control" placeholder="Email Address" required>
+        </div>
+
+        <!-- Sign Up Button -->
+        <button type="submit" class="btn-signup">Sign Up</button>
+    </form>
+
+    <div class="signup-footer">
+        <p>Already have an account?<a href="account1.html"> Log in here</a>.</p>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class="footer">
+    <p>&copy; 2025 Casa Dei Fiori. All rights reserved.</p>
+    <p>Contact us: contact@casadeifiori.com</p>
+    <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </p>
+</div>
+
+<script>
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent the form from submitting the default way
+
+        // Redirect to home.html after the form is successfully submitted
+        window.location.href = 'home.html';  // Redirect to the Home page
+    });
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa dei Fiori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <style>
+        body {
+            background-color: #FCE4EC;
+			background-image: url('https://i.imgur.com/NyS8vZU.jpeg');
+			background-position: center center;
+			background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #880E4F;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 3.7rem;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: max-height 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar button {
+            background-color: #C2185B;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+
+        .navbar button:hover {
+            background-color: #AD1457;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Button */
+		.menu-toggle {
+			display: none;
+			font-size: 2rem;
+			color: white;
+			cursor: pointer;
+		}
+
+		@media (max-width: 768px) {
+			.navbar {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.navbar ul {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 12px;
+				justify-content: space-between;
+				width: 100%;
+				max-height: 0;
+				transition: max-height 0.5s ease-in-out;
+			}
+
+			.navbar ul.active {
+				max-height: 600px;
+			}
+
+			.navbar ul li {
+				width: calc(33.33% - 12px);
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.navbar button, .add-to-cart, .product-button, .cart-button {
+				padding: 12px 16px; /* Reduced padding for a more compact look */
+				width: 100%; /* Ensures all buttons are of equal size */
+				box-sizing: border-box;
+				text-align: center; /* Ensures text is centered */
+				white-space: nowrap; /* Prevents wrapping of text */
+				font-size: 1rem; /* Adjust font size for smaller buttons */
+				overflow: hidden; /* Hides text that overflows */
+				text-overflow: ellipsis; /* Optional: Adds ellipsis for overflow text */
+			}
+
+			.menu-toggle {
+				display: block;
+			}
+		}
+
+        /* Cart Empty Message */
+			.cart-container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				height: 60vh;
+				margin: 20px auto;
+				width: 80%;
+			}
+
+			.cart-message {
+				background-color: #FFF0F3;
+				border-radius: 10px;
+				box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+				padding: 40px;
+				width: 100%;
+				max-width: 500px;
+				box-sizing: border-box; /* Ensures padding is considered in width */
+			}
+
+			.cart-message h3 {
+				font-size: 2.5rem;
+				color: #D81B60;
+				font-family: 'Dancing Script', cursive;
+				margin-bottom: 20px;
+			}
+
+			.cart-message p {
+				font-size: 1.2rem;
+				color: #444;
+				margin-bottom: 20px;
+			}
+
+			.cart-message button {
+				background-color: #D81B60;
+				color: white;
+				border: none;
+				font-size: 1.2rem;
+				padding: 12px 25px;
+				border-radius: 8px;
+				cursor: pointer;
+				transition: background 0.3s;
+			}
+
+			.cart-message button:hover {
+				background-color: #AD1457;
+			}
+
+			/* Footer Section */
+			.footer {
+				background-color: #880E4F;
+				color: white;
+				text-align: center;
+				padding: 20px 0;
+			}
+
+			.footer a {
+				color: white;
+				text-decoration: none;
+				margin: 0 10px;
+			}
+
+			.footer a:hover {
+				text-decoration: underline;
+			}
+
+			/* Mobile Responsiveness */
+			@media (max-width: 767px) {
+				/* Adjust cart container */
+				.cart-container {
+					height: auto;
+					padding: 20px;
+					width: 90%;
+				}
+
+				/* Adjust message box */
+				.cart-message {
+					padding: 25px;
+					max-width: 100%;
+				}
+
+				.cart-message h3 {
+					font-size: 2rem; /* Slightly smaller heading */
+				}
+
+				.cart-message p {
+					font-size: 1rem; /* Slightly smaller text */
+				}
+
+				.cart-message button {
+					font-size: 1rem; /* Slightly smaller button text */
+					padding: 10px 20px; /* Adjust button size */
+				}
+
+				/* Adjust footer links */
+				.footer {
+					padding: 15px 0;
+				}
+
+				
+			}
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar">
+    <h1>Casa dei Fiori</h1>
+    <!-- Mobile menu toggle button -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navbar-menu">
+        <li><a href="home1.html"><button><i class="fa-solid fa-house"></i> Home</button></a></li>
+        <li><a href="about1.html"><button><i class="fa-solid fa-person"></i> About Us</button></a></li>
+        <li><a href="products1.html"><button><i class="fa-solid fa-box-open"></i> Products</button></a></li>
+        <li><a href="contact1.html"><button><i class="fa-solid fa-phone"></i> Contact</button></a></li>
+        <li><a href="account1.html"><button><i class="fa-solid fa-user"></i> Account</button></a></li>
+        <li><a href="cart1.html"><button><i class="fa-solid fa-cart-shopping"></i> Your Cart</button></a></li>
+    </ul>
+</nav>
+
+
+<!-- Cart Empty Message Section -->
+<div class="cart-container">
+    <div class="cart-message">
+        <h3>Oops! Your cart is empty</h3>
+        <p>It looks like you haven't added any products to your cart yet. Start shopping and add your favorite products now!</p>
+        <button onclick="window.location.href='products.html'">Go to Products</button>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class="footer">
+    <p>&copy; 2025 Casa Dei Fiori. All rights reserved.</p>
+    <p>Contact us: contact@casadeifiori.com</p>
+    <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </p>
+</div>
+
+<script>
+    
+    function toggleMenu() {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    }
+</script>
+</body>
+</html>

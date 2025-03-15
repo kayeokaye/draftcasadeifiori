@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa dei Fiori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+    <style>
+        body {
+            background-color: #FCE4EC;
+			background-image: url('https://i.imgur.com/NyS8vZU.jpeg');
+			background-position: center center;
+			background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #880E4F;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 3.7rem;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: max-height 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar button {
+            background-color: #C2185B;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+
+        .navbar button:hover {
+            background-color: #AD1457;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Button */
+		.menu-toggle {
+			display: none;
+			font-size: 2rem;
+			color: white;
+			cursor: pointer;
+		}
+
+		@media (max-width: 768px) {
+			.navbar {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.navbar ul {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 12px;
+				justify-content: space-between;
+				width: 100%;
+				max-height: 0;
+				transition: max-height 0.5s ease-in-out;
+			}
+
+			.navbar ul.active {
+				max-height: 600px;
+			}
+
+			.navbar ul li {
+				width: calc(33.33% - 12px);
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.navbar button, .add-to-cart, .product-button, .cart-button {
+				padding: 12px 16px; /* Reduced padding for a more compact look */
+				width: 100%; /* Ensures all buttons are of equal size */
+				box-sizing: border-box;
+				text-align: center; /* Ensures text is centered */
+				white-space: nowrap; /* Prevents wrapping of text */
+				font-size: 1rem; /* Adjust font size for smaller buttons */
+				overflow: hidden; /* Hides text that overflows */
+				text-overflow: ellipsis; /* Optional: Adds ellipsis for overflow text */
+			}
+
+			.menu-toggle {
+				display: block;
+			}
+		}
+
+			.content-container {
+				display: flex;
+				justify-content: center;
+				gap: 40px;
+				margin: 50px auto;
+				width: 80%;
+				flex-wrap: wrap; /* Ensures the sections wrap on smaller screens */
+			}
+
+			.contact-section, .social-section {
+				flex: 1;
+				padding: 40px;
+				text-align: center;
+				background-color: #FFF0F3;
+				border-radius: 10px;
+				box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+			}
+
+			.contact-section h3, .social-section h3 {
+				font-size: 2.5rem;
+				color: #D81B60;
+				font-family: 'Dancing Script', cursive;
+			}
+
+			.contact-section form {
+				max-width: 400px;
+				margin: auto;
+				text-align: left;
+			}
+
+			.contact-section input, .contact-section textarea {
+				width: 100%;
+				padding: 12px;
+				margin: 10px 0;
+				border: 1px solid #D81B60;
+				border-radius: 5px;
+				font-size: 1rem;
+			}
+
+			.contact-section button {
+				background-color: #D81B60;
+				color: white;
+				border: none;
+				font-size: 1.2rem;
+				padding: 12px 25px;
+				border-radius: 8px;
+				cursor: pointer;
+				transition: background 0.3s;
+			}
+
+			.contact-section button:hover {
+				background-color: #AD1457;
+			}
+
+			.social-section p {
+				font-size: 1.2rem;
+				color: #444;
+				font-weight: bold;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 10px 0;
+			}
+
+			.social-section p strong {
+				flex: 1.5;
+				text-align: left;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+
+			.social-section span {
+				flex: 2;
+				text-align: left;
+			}
+
+			.footer {
+				background-color: #880E4F;
+				color: white;
+				text-align: center;
+				padding: 20px 0;
+			}
+
+			.footer a {
+				color: white;
+				text-decoration: none;
+				margin: 0 10px;
+			}
+
+			.footer a:hover {
+				text-decoration: underline;
+			}
+
+			/* Media Queries for Responsiveness */
+			@media screen and (max-width: 768px) {
+				.content-container {
+					width: 95%;
+					gap: 20px; /* Reduce gap between elements */
+				}
+
+				.contact-section, .social-section {
+					flex: 1 1 100%; /* Make sections take full width on small screens */
+					padding: 20px; /* Reduce padding */
+				}
+
+				.contact-section h3, .social-section h3 {
+					font-size: 2rem; /* Reduce heading size */
+				}
+
+				.contact-section form {
+					max-width: 100%; /* Make form take full width on smaller screens */
+				}
+
+				.contact-section button {
+					font-size: 1rem; /* Make button font smaller */
+					padding: 10px 20px; /* Adjust button padding */
+				}
+
+				.social-section p {
+					font-size: 1rem; /* Reduce paragraph font size */
+				}
+
+				.social-section span {
+					font-size: 1rem; /* Adjust social section text size */
+				}
+
+				.footer {
+					padding: 10px 0; /* Reduce footer padding */
+				}
+			}
+
+			/* Further adjustments for very small devices like smartphones in portrait */
+			@media screen and (max-width: 480px) {
+				.content-container {
+					width: 100%;
+					gap: 10px; 
+				}
+
+				.contact-section, .social-section {
+					padding: 15px; 
+				}
+
+				.contact-section h3, .social-section h3 {
+					font-size: 1.8rem; 
+				}
+
+				.contact-section input, .contact-section textarea {
+					font-size: 0.9rem; 
+
+				.contact-section button {
+					font-size: 1rem;
+					padding: 10px 18px;
+				}
+
+				.footer {
+					font-size: 0.9rem; 
+				}
+			}
+
+		
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <h1>Casa dei Fiori</h1>
+    <!-- Mobile menu toggle button -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navbar-menu">
+        <li><a href="home1.html"><button><i class="fa-solid fa-house"></i> Home</button></a></li>
+        <li><a href="about1.html"><button><i class="fa-solid fa-person"></i> About Us</button></a></li>
+        <li><a href="products1.html"><button><i class="fa-solid fa-box-open"></i> Products</button></a></li>
+        <li><a href="contact1.html"><button><i class="fa-solid fa-phone"></i> Contact</button></a></li>
+        <li><a href="account1.html"><button><i class="fa-solid fa-user"></i> Account</button></a></li>
+        <li><a href="cart1.html"><button><i class="fa-solid fa-cart-shopping"></i> Your Cart</button></a></li>
+    </ul>
+</nav>
+
+    <div class="content-container">
+        <div class="contact-section">
+            <h3>We'd love to hear from you!</h3>
+            
+            </form>
+        </div>
+
+        <div class="social-section">
+            <h3>Connect with us</h3>
+            
+        </div>
+    </div>
+
+<!-- Footer Section -->
+<div class="footer">
+    <p>&copy; 2025 Casa Dei Fiori. All rights reserved.</p>
+    <p>Contact us: contact@casadeifiori.com</p>
+    <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </p>
+</div>
+
+<script>
+    
+    function toggleMenu() {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
+

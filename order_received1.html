@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Received - Casa dei Fiori</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <style>
+        body {
+            background-color: #FCE4EC;
+            background-image: url('https://i.imgur.com/NyS8vZU.jpeg');
+            background-position: center center;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;  /* Ensures full page height */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #880E4F;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar h1 {
+            color: white;
+            font-size: 3.7rem;
+            font-family: 'Dancing Script', cursive;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            transition: max-height 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar button {
+            background-color: #C2185B;
+            color: white;
+            border: none;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s ease-in-out;
+            box-sizing: border-box;
+        }
+
+        .navbar button:hover {
+            background-color: #AD1457;
+            transform: scale(1.05);
+        }
+
+        /* Mobile Menu Button */
+		.menu-toggle {
+			display: none;
+			font-size: 2rem;
+			color: white;
+			cursor: pointer;
+		}
+
+		@media (max-width: 768px) {
+			.navbar {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.navbar ul {
+				flex-direction: row;
+				flex-wrap: wrap;
+				gap: 12px;
+				justify-content: space-between;
+				width: 100%;
+				max-height: 0;
+				transition: max-height 0.5s ease-in-out;
+			}
+
+			.navbar ul.active {
+				max-height: 600px;
+			}
+
+			.navbar ul li {
+				width: calc(33.33% - 12px);
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.navbar button, .add-to-cart, .product-button, .cart-button {
+				padding: 12px 16px; /* Reduced padding for a more compact look */
+				width: 100%; /* Ensures all buttons are of equal size */
+				box-sizing: border-box;
+				text-align: center; /* Ensures text is centered */
+				white-space: nowrap; /* Prevents wrapping of text */
+				font-size: 1rem; /* Adjust font size for smaller buttons */
+				overflow: hidden; /* Hides text that overflows */
+				text-overflow: ellipsis; /* Optional: Adds ellipsis for overflow text */
+			}
+
+			.menu-toggle {
+				display: block;
+			}
+		}
+
+			.order-container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				margin: 0 auto;
+				padding: 40px;
+				width: 100%;
+				max-width: 700px;
+				box-sizing: border-box;
+			}
+
+			.order-message {
+				background-color: #FFF0F3;
+				border-radius: 12px;
+				box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+				padding: 30px;
+				width: 100%;
+				max-width: 100%;
+				box-sizing: border-box;
+				margin: 0 20px;
+			}
+
+			.order-message h3 {
+				font-size: 3rem;
+				color: #D81B60;
+				font-family: 'Dancing Script', cursive;
+				margin-bottom: 20px;
+			}
+
+			.order-message p {
+				font-size: 1.3rem;
+				color: #444;
+				margin-bottom: 15px;
+				line-height: 1.6;
+			}
+
+			.order-message button {
+				background-color: #D81B60;
+				color: white;
+				border: none;
+				font-size: 1.4rem;
+				padding: 16px 25px;
+				border-radius: 10px;
+				cursor: pointer;
+				transition: background 0.3s;
+				width: 100%;
+				max-width: 350px;
+				margin-top: 20px;
+			}
+
+			.order-message button:hover {
+				background-color: #AD1457;
+			}
+
+			.footer {
+				background-color: #880E4F;
+				color: white;
+				text-align: center;
+				padding: 18px 0;
+				margin-top: 20px;
+			}
+
+			.footer a {
+				color: white;
+				text-decoration: none;
+				margin: 0 12px;
+				font-size: 1.2rem;
+			}
+
+			.footer a:hover {
+				text-decoration: underline;
+			}
+
+			@media screen and (max-width: 768px) {
+				.order-container {
+					flex-direction: column;
+					justify-content: flex-start;
+					width: 100%;
+					max-width: 100%;
+					padding: 18px;
+				}
+
+				.order-message {
+					width: 100%;
+					padding: 18px;
+					max-width: 100%;
+					margin: 0 12px;
+				}
+
+				.order-message h3 {
+					font-size: 1.8rem;
+				}
+
+				.order-message p {
+					font-size: 1.1rem;
+				}
+
+				.order-message button {
+					width: 100%;
+					max-width: 270px;
+					padding: 12px 20px;
+				}
+
+				.footer {
+					padding: 12px 0;
+				}
+
+				.footer a {
+					font-size: 1rem;
+					margin: 0 5px;
+				}
+			}
+
+			@media screen and (max-width: 480px) {
+				.order-container {
+					padding: 10px;
+				}
+
+				.order-message {
+					padding: 16px;
+					max-width: 100%;
+					margin: 0 10px;
+				}
+
+				.order-message h3 {
+					font-size: 1.5rem;
+				}
+
+				.order-message p {
+					font-size: 1rem;
+				}
+
+				.order-message button {
+					width: 100%;
+					max-width: 240px;
+					padding: 12px 18px;
+				}
+
+				.footer {
+					padding: 8px 0;
+				}
+
+				.footer a {
+					font-size: 0.95rem;
+					margin: 0 4px;
+				}
+			}
+
+
+        
+    </style>
+</head>
+<body>
+
+<!-- Navbar Section -->
+<nav class="navbar">
+    <h1>Casa dei Fiori</h1>
+    <!-- Mobile menu toggle button -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <ul id="navbar-menu">
+        <li><a href="home.html"><button><i class="fa-solid fa-house"></i> Home</button></a></li>
+        <li><a href="about.html"><button><i class="fa-solid fa-person"></i> About Us</button></a></li>
+        <li><a href="products.html"><button><i class="fa-solid fa-box-open"></i> Products</button></a></li>
+        <li><a href="contact.html"><button><i class="fa-solid fa-phone"></i> Contact</button></a></li>
+        <li><a href="account.html"><button><i class="fa-solid fa-user"></i> Account</button></a></li>
+        <li><a href="cart.html"><button><i class="fa-solid fa-cart-shopping"></i> Your Cart</button></a></li>
+    </ul>
+</nav>
+
+<!-- Order Received Section -->
+<div class="order-container">
+    <div class="order-message">
+        <h3>Order Received!</h3>
+        <p>Thank you for choosing Casa de Fiori for your special occasion!</p>
+		<p>We are currently processing your order with the utmost care and attention, ensuring that each DIY bloom is handpicked with love. </p>
+        <p>Your beautiful bouquet will be on its way to brighten someone's day very soon. You will receive an email confirmation shortly, detailing your order and estimated delivery time. </p>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<div class="footer">
+    <p>&copy; 2025 Casa Dei Fiori. All rights reserved.</p>
+    <p>Contact us: contact@casadeifiori.com</p>
+    <p>
+        <a href="#">Facebook</a> |
+        <a href="#">Instagram</a> |
+        <a href="#">Twitter</a>
+    </p>
+</div>
+
+<script>
+    
+    function toggleMenu() {
+        const menu = document.getElementById('navbar-menu');
+        menu.classList.toggle('active');
+    }
+</script>
+
+</body>
+</html>
